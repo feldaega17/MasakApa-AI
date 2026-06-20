@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+pandas
+scikit-learn
+pytest
+streamlit
+requests
+
+streamlit>=1.20.0
+requests
