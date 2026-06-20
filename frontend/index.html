@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MasakApa AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#31394d",
+                      "on-secondary-container": "#5b3800",
+                      "tertiary-fixed-dim": "#c0c1ff",
+                      "on-primary-container": "#00422b",
+                      "surface-variant": "#2d3449",
+                      "tertiary-container": "#9699ff",
+                      "on-error": "#690005",
+                      "surface-container-low": "#131b2e",
+                      "secondary-container": "#ee9800",
+                      "primary-container": "#10b981",
+                      "surface-container-lowest": "#060e20",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed": "#e1e0ff",
+                      "on-primary-fixed": "#002113",
+                      "on-tertiary": "#1000a9",
+                      "surface-tint": "#4edea3",
+                      "surface-dim": "#0b1326",
+                      "on-secondary-fixed-variant": "#653e00",
+                      "inverse-on-surface": "#283044",
+                      "primary-fixed-dim": "#4edea3",
+                      "surface-container-high": "#222a3d",
+                      "outline": "#86948a",
+                      "background": "#0b1326",
+                      "surface": "#0b1326",
+                      "on-secondary-fixed": "#2a1700",
+                      "inverse-primary": "#006c49",
+                      "outline-variant": "#3c4a42",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#c0c1ff",
+                      "secondary-fixed-dim": "#ffb95f",
+                      "primary": "#4edea3",
+                      "on-surface": "#dae2fd",
+                      "inverse-surface": "#dae2fd",
+                      "on-tertiary-fixed-variant": "#2f2ebe",
+                      "surface-container": "#171f33",
+                      "on-primary-fixed-variant": "#005236",
+                      "on-tertiary-fixed": "#07006c",
+                      "on-background": "#dae2fd",
+                      "surface-container-highest": "#2d3449",
+                      "on-secondary": "#472a00",
+                      "on-primary": "#003824",
+                      "primary-fixed": "#6ffbbe",
+                      "on-tertiary-container": "#1d17b2",
+                      "on-surface-variant": "#bbcabf",
+                      "secondary-fixed": "#ffddb8",
+                      "secondary": "#ffb95f",
+                      "error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "xl": "40px",
+                      "margin-mobile": "20px",
+                      "2xl": "64px",
+                      "gutter": "20px",
+                      "lg": "24px",
+                      "margin-desktop": "80px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Outfit"],
+                      "headline-md": ["Outfit"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Outfit"],
+                      "display-lg-mobile": ["Outfit"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-panel {
+            background-color: rgba(11, 19, 38, 0.6);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 40px 40px -15px rgba(0, 0, 0, 0.4);
+        }
+        .textarea-focus:focus-within {
+            box-shadow: 0 0 15px rgba(78, 222, 163, 0.2);
+            border-color: theme('colors.primary');
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pt-20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 dark:bg-surface/60 backdrop-blur-md border-b border-white/10 shadow-[0_40px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-7xl mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary">
+                MasakApa AI
+            </div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 active scale-95 transition-transform" href="#">Resep</a>
+<a class="text-on-surface-variant font-label-md hover:text-on-surface transition-colors hover:bg-white/5 px-sm py-xs rounded" href="#">Koleksi</a>
+<a class="text-on-surface-variant font-label-md hover:text-on-surface transition-colors hover:bg-white/5 px-sm py-xs rounded" href="#">Tentang</a>
+</div>
+<div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-full hover:opacity-90 transition-opacity">
+                    Masuk
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-2xl flex flex-col items-center">
+<!-- Hero Section -->
+<section class="w-full max-w-3xl text-center flex flex-col items-center gap-lg mb-2xl">
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary animate-pulse-slow">
+                MasakApa AI
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-md">
+                Temukan ide masakan berdasarkan bahan yang tersedia di rumah.
+            </p>
+<div class="w-full relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative w-full glass-panel rounded-2xl p-sm flex flex-col textarea-focus transition-all duration-300">
+<textarea class="w-full bg-transparent border-none text-on-surface text-body-lg font-body-lg resize-none focus:ring-0 placeholder:text-on-surface-variant/50 p-md" id="ingredients-input" placeholder="ayam, bawang putih, cabai..." rows="3"></textarea>
+<div class="flex flex-col sm:flex-row justify-between items-center px-sm pb-sm mt-sm gap-md">
+    <div class="flex flex-col sm:flex-row gap-sm w-full sm:w-auto">
+        <select id="category-filter" class="bg-surface/80 border border-white/10 rounded-lg text-on-surface text-label-md px-sm py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+            <option value="Semua Kategori">Semua Kategori</option>
+            <option value="Ayam">Ayam</option>
+            <option value="Sapi">Sapi & Daging</option>
+            <option value="Sayur">Sayuran</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Kue">Kue & Dessert</option>
+            <option value="Minuman">Minuman</option>
+            <option value="Nasi">Nasi</option>
+            <option value="Mie">Mie & Pasta</option>
+        </select>
+        <select id="sort-filter" class="bg-surface/80 border border-white/10 rounded-lg text-on-surface text-label-md px-sm py-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+            <option value="relevance">Paling Relevan</option>
+            <option value="practicality">Paling Praktis (Sedikit Langkah)</option>
+        </select>
+    </div>
+    <button class="bg-primary text-on-primary font-label-md text-label-md px-xl py-sm rounded-full hover:shadow-[0_0_20px_rgba(78,222,163,0.4)] transition-all flex items-center justify-center gap-xs w-full sm:w-auto shrink-0" id="search-btn">
+        <span class="material-symbols-outlined">search</span> Cari Resep
+    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Skeleton Loader (Hidden) -->
+<section class="w-full hidden flex-col gap-lg mb-2xl" id="skeleton-loader">
+<div class="h-8 w-64 bg-surface-variant rounded animate-pulse mb-md"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<div class="glass-panel rounded-xl h-96 flex flex-col p-0 overflow-hidden relative">
+<div class="h-48 bg-surface-variant shimmer w-full"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="h-6 bg-surface-variant shimmer w-3/4 rounded"></div>
+<div class="h-4 bg-surface-variant shimmer w-1/2 rounded"></div>
+<div class="mt-auto h-10 bg-surface-variant shimmer w-full rounded"></div>
+</div>
+</div>
+<div class="glass-panel rounded-xl h-96 flex flex-col p-0 overflow-hidden relative hidden md:flex">
+<div class="h-48 bg-surface-variant shimmer w-full"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="h-6 bg-surface-variant shimmer w-3/4 rounded"></div>
+<div class="h-4 bg-surface-variant shimmer w-1/2 rounded"></div>
+<div class="mt-auto h-10 bg-surface-variant shimmer w-full rounded"></div>
+</div>
+</div>
+<div class="glass-panel rounded-xl h-96 flex flex-col p-0 overflow-hidden relative hidden lg:flex">
+<div class="h-48 bg-surface-variant shimmer w-full"></div>
+<div class="p-md flex flex-col gap-sm">
+<div class="h-6 bg-surface-variant shimmer w-3/4 rounded"></div>
+<div class="h-4 bg-surface-variant shimmer w-1/2 rounded"></div>
+<div class="mt-auto h-10 bg-surface-variant shimmer w-full rounded"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Results Section -->
+<section class="w-full hidden flex-col gap-lg w-full" id="results-section">
+<h2 class="text-headline-md font-headline-md text-on-surface mb-md" id="results-summary">
+<!-- Summary injected here -->
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg" id="results-grid">
+<!-- Cards injected here -->
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="mt-auto w-full py-xl bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-lg">
+<div class="text-headline-md font-headline-md font-bold text-primary">
+            MasakApa AI
+        </div>
+<div class="text-body-md font-body-md text-on-surface-variant dark:text-on-surface-variant text-center md:text-left">
+            © 2024 MasakApa AI. Dibuat dengan kecerdasan kuliner.
+        </div>
+<div class="flex gap-md">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Kebijakan Privasi</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Syarat Layanan</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-primary hover:opacity-80 transition-opacity" href="#">Bantuan</a>
+</div>
+</footer>
+<!-- Template for Recipe Card -->
+<template id="recipe-card-template">
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col relative group">
+<div class="h-48 relative overflow-hidden">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="..." style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-80"></div>
+<div class="absolute top-sm right-sm bg-surface-variant/80 backdrop-blur rounded-full px-sm py-xs flex items-center gap-xs border border-white/10 text-secondary">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+<span class="text-label-sm font-label-sm font-bold score-text"></span>
+</div>
+<div class="absolute top-sm left-sm text-on-surface-variant px-sm py-xs flex items-center gap-xs bg-surface/50 rounded-full backdrop-blur text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">favorite</span> <span class="loves-count">0</span>
+</div>
+</div>
+<div class="p-md flex flex-col flex-grow relative z-10 -mt-lg">
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-primary-container/20 text-primary border border-primary/30 px-sm py-xs rounded text-label-sm font-label-sm category-badge backdrop-blur">Kategori</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-xs recipe-title leading-tight line-clamp-2">Judul Resep</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-md match-reason"></p>
+
+<button class="mt-auto w-full py-sm rounded-lg border border-secondary text-secondary font-label-md text-label-md hover:bg-secondary/10 transition-colors flex justify-center items-center gap-xs detail-btn">
+    Lihat Detail
+    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+
+<div class="detail-panel hidden mt-md border-t border-white/10 pt-md text-label-sm font-label-sm flex-col gap-sm text-left">
+    <div><span class="text-primary font-bold">Bahan Tersedia:</span> <span class="matched-ing"></span></div>
+    <div><span class="text-error font-bold">Bahan Kurang:</span> <span class="missing-ing"></span></div>
+    <hr class="border-white/10 my-1">
+    <div><span class="text-on-surface font-bold">Resep Lengkap:</span><br><span class="full-ing text-on-surface-variant whitespace-pre-wrap"></span></div>
+    <hr class="border-white/10 my-1">
+    <div><span class="text-on-surface font-bold">Langkah-langkah:</span><br><span class="steps text-on-surface-variant whitespace-pre-wrap"></span></div>
+    <a href="#" target="_blank" class="mt-sm text-primary underline hover:text-primary/80 source-url inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">open_in_new</span> Sumber Resep</a>
+</div>
+</div>
+</div>
+</template>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBtn = document.getElementById('search-btn');
+            const ingredientsInput = document.getElementById('ingredients-input');
+            const skeletonLoader = document.getElementById('skeleton-loader');
+            const resultsSection = document.getElementById('results-section');
+            const resultsGrid = document.getElementById('results-grid');
+            const resultsSummary = document.getElementById('results-summary');
+            const template = document.getElementById('recipe-card-template');
+
+            // Handle Enter key
+            ingredientsInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    searchBtn.click();
+                }
+            });
+
+            searchBtn.addEventListener('click', async () => {
+                const ingredients = ingredientsInput.value.trim();
+                if (!ingredients) return;
+
+                // UI State: Loading
+                resultsSection.classList.add('hidden');
+                skeletonLoader.classList.remove('hidden');
+                searchBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Mencari...';
+                searchBtn.disabled = true;
+
+                try {
+                    // API Call to FastAPI backend
+                    const categoryFilter = document.getElementById('category-filter');
+                    const sortFilter = document.getElementById('sort-filter');
+                    
+                    const response = await fetch('/recommend', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            ingredients: ingredients,
+                            category: categoryFilter.value,
+                            sort_by: sortFilter.value
+                        })
+                    });
+                    
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    const data = await response.json();
+                    
+                    renderResults(data.recommendations);
+                } catch (error) {
+                    console.error("Error fetching recipes:", error);
+                    resultsSummary.textContent = "Terjadi kesalahan saat menghubungi server API.";
+                    resultsSection.classList.remove('hidden');
+                } finally {
+                    // UI State: Complete
+                    skeletonLoader.classList.add('hidden');
+                    searchBtn.innerHTML = '<span class="material-symbols-outlined">search</span> Cari Resep';
+                    searchBtn.disabled = false;
+                }
+            });
+
+            function renderResults(recipes) {
+                resultsGrid.innerHTML = '';
+                
+                if (!recipes || recipes.length === 0) {
+                    resultsSummary.textContent = "Tidak ada resep yang cocok.";
+                } else {
+                    resultsSummary.textContent = `Ditemukan ${recipes.length} rekomendasi resep!`;
+                    
+                    recipes.forEach(recipe => {
+                        const clone = template.content.cloneNode(true);
+                        
+                        clone.querySelector('.recipe-title').textContent = recipe.title;
+                        clone.querySelector('.category-badge').textContent = recipe.category;
+                        
+                        const scorePercent = Math.round(recipe.similarity_score * 100);
+                        clone.querySelector('.score-text').textContent = `${scorePercent}% Cocok`;
+                        
+                        const matchedCount = recipe.matched_ingredients.length;
+                        const missingCount = recipe.missing_ingredients.length;
+                        const total = matchedCount + missingCount;
+                        clone.querySelector('.match-reason').textContent = `Direkomendasikan karena ${matchedCount} dari ${total} bahan tersedia.`;
+                        
+                        clone.querySelector('.loves-count').textContent = recipe.loves;
+                        
+                        clone.querySelector('.matched-ing').textContent = recipe.matched_ingredients.join(', ') || '-';
+                        clone.querySelector('.missing-ing').textContent = recipe.missing_ingredients.join(', ') || '-';
+                        clone.querySelector('.full-ing').textContent = recipe.ingredients.replace(/--/g, ', ');
+                        clone.querySelector('.steps').textContent = recipe.steps;
+                        clone.querySelector('.source-url').href = recipe.url;
+                        
+                        const btn = clone.querySelector('.detail-btn');
+                        const panel = clone.querySelector('.detail-panel');
+                        btn.addEventListener('click', function() {
+                            if (panel.classList.contains('hidden')) {
+                                panel.classList.remove('hidden');
+                                panel.classList.add('flex');
+                                btn.innerHTML = `Tutup Detail <span class="material-symbols-outlined text-[18px]">expand_less</span>`;
+                            } else {
+                                panel.classList.add('hidden');
+                                panel.classList.remove('flex');
+                                btn.innerHTML = `Lihat Detail <span class="material-symbols-outlined text-[18px]">expand_more</span>`;
+                            }
+                        });
+
+                        resultsGrid.appendChild(clone);
+                    });
+                }
+                
+                resultsSection.classList.remove('hidden');
+            }
+        });
+    </script>
+</body></html>
